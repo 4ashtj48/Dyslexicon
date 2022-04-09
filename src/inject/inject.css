@@ -1,0 +1,28 @@
+/**
+ * Place your custom CSS styles here.
+ **/
+
+
+
+div#dyslexiconPopUp {
+    display: none;
+    position: fixed; 
+    flex-direction: column;
+    background: #fff;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 5px;
+}
+div#dyslexiconPopUp.show {
+    display: flex;
+}
+div#dyslexiconPopUp > button {
+    padding: 5px;
+    cursor: pointer;
+    text-align: left;
+}
+
+div#dyslexiconPopUp > button:hover {
+    background: #ececec;
+}
+
