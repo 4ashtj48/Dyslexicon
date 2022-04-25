@@ -1,35 +1,71 @@
 <!DOCTYPE html>
+
+
+
+
 <style type="text/css">
   #mainPopup {
     padding: 10px;
     height: 200px;
     width: 400px;
     font-family: Helvetica, Ubuntu, Arial, sans-serif;
+    border-radius: 25px;
+    border: 2px solid #73AD21;
   }
   h1 {
-    font-size: 2em;
+    font-size: 1em;
   }
 </style>
 
+<!--use something like this -->
+<link rel="stylesheet" type="text/css" href="browser_action.css" />
+<script src="js/jquery-3.1.1.min.js"></script>
+<!--use something like this -->
+
 <div id="mainPopup">
-  <h1>Hello extensionizr!</h1>
-  <p>
-    To shut this popup down, edit the manifest file and remove the "default
-    popup" key. To edit it, just edit ext/browser_action/browser_action.html.
-    The CSS is there, too.
-  </p>
+
+  <button type="button" class="close" aria-label="Close"></button>
+
+  <h1>Dyslexicon Options</h1>
+
+    <p>Voice Option</p>
+  
+
+    <p>Rate</p>
+
+
+    <p>Pitch</p>
+
+    <div class="pitch-visible">
+      <span data-i18n="options_pitch_label"></span>
+    </div>
+    <div class="pitch-visible">
+      <div
+        id="pitch"
+        class="slider"
+        data-min="0"
+        data-max="2"
+        data-steps="40"
+      ></div>
+    </div>
+
+    <p>Volume</p>
+    <div>
+      <span data-i18n="options_volume_label"></span>
+    </div>
+    <div>
+      <div
+        id="volume"
+        class="slider"
+        data-min="0.2"
+        data-max="1"
+        data-steps="40"
+      ></div>
+    </div>
+
+    <p>Text Colour</p>
+    <p>Text Size</p>
+    <p>Spacing?</p>
+
+  </div>
 </div>
-
-<!--disable extension-->
-
-<!---
-//  // Save it using the Chrome extension storage API.
-chrome.storage.sync.set({'foo': 'hello', 'bar': 'hi'}, function() {
-  console.log('Settings saved');
-});
-
-// Read it using the storage API
-chrome.storage.sync.get(['foo', 'bar'], function(items) {
-  message('Settings retrieved', items);
-});
--->
