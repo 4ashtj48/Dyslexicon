@@ -3,6 +3,7 @@ var popupOptions = null;
 var exactText = "";
 var cursorX = 0;
 var cursorY = 0;
+
 let userOptions = {
   voiceOption: "",
   rate: 1,
@@ -179,7 +180,10 @@ function playButtonOperation(e) {
         msg.voice = pickedVoice;
       }
 
+      // userOptions.pitch
       //  rate and pitch from the user option
+      //rate: 1,
+      // pitch: 1,
     }
 
     msg.text = exactText;
@@ -262,6 +266,8 @@ function showOptionsPopup() {
 function hideOptionsPopup() {
   popupOptions.classList.remove("show");
 }
+
+///allow change from background options user option
 
 function setHighlightColors() {
   chrome.storage.sync.get(["userOption"], function (result) {

@@ -30,7 +30,6 @@ select#voice-select {
 font-size: 16px;
 }
 
-
   h1 {
     margin-top: 1rem;
     margin-bottom: .5rem;
@@ -42,56 +41,30 @@ font-size: 16px;
   .form-group {
     margin-bottom: 1rem;
   }
-
-
-  
+ 
   select.form-control:not([size]):not([multiple]) {
     height: calc(2.25rem + 2px);
   }
 
-  input {
-    margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-  }
-  input[type=checkbox], input[type=radio] {
-    padding: 0;
-  }
-
-  .btn {
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  }
-  .btn:not(:disabled) {
-    cursor: pointer;
-  }
 
   #rate-input-div {
     display: none;
   }
   
   select#text-size {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .button {
+  font-size: 12px;
   background: none;
   border: 2px solid black;
   padding: 10px 15px;
   opacity: 0.3;
   outline: none;
+  vertical-align: middle;
 }
+
 
 .button.active {
   opacity: 1;
@@ -106,10 +79,14 @@ button#btnBlueTxt {color: blue;}
 
 button#btnGreenTxt {color: green;}
 
+button#btnBlackTxt {color: black;}
 
 button#btnCream {
   background-color:#fffff2 ;
 }
 button#btnGrey {
   background-color:#D3D3D3 ;
+}
+button#btnDefaultBg {
+  background-color:#3297FD ;
 }

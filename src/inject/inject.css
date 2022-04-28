@@ -19,6 +19,13 @@ div#dyslexiconPopUp > button {
 
 div#dyslexiconPopUp > button:hover {
     background: #ececec;
+    background-color: white;
+    color: black;
+}
+
+button.dyslexicon {
+   background-color: white !important;
+    color: black !important;
 }
 
   .dyslexicon-text-default *::selection {
@@ -46,6 +53,13 @@ div#dyslexiconPopUp > button:hover {
   .dyslexicon-text-blue *::-moz-selection {
       color: blue;
   }
+
+  .dyslexicon-text-black *::selection {
+    color: black; /* WebKit/Blink Browsers */
+  }
+  .dyslexicon-text-blue *::-moz-selection {
+      color: black;
+  }
   
 
   .dyslexicon-background-default *::selection {
@@ -56,10 +70,10 @@ div#dyslexiconPopUp > button:hover {
   }
 
   .dyslexicon-background-cream *::selection {
-    background-color:#ebdc92; /* WebKit/Blink Browsers */
+    background-color:#F8F0E3; /* WebKit/Blink Browsers */
   }
   .dyslexicon-background-cream *::-moz-selection {
-    background-color:#ebdc92;
+    background-color:#F8F0E3;
   }
 
   .dyslexicon-background-grey *::selection {

@@ -1,14 +1,13 @@
-const rate = document.getElementById("rate");
-const pitch = document.getElementById("pitch");
-
 let userOptions = {
   voiceOption: "",
   rate: 1,
   pitch: 1,
   textColor: "default",
-  textSize: "default",
   backgroundColor: "default",
 };
+
+const rate = document.getElementById("rate");
+const pitch = document.getElementById("pitch");
 
 function updateUI() {
   rate.value = userOptions.rate;
@@ -23,6 +22,7 @@ function updateUI() {
       buttons[c].classList.remove("active");
     }
   }
+  //textcolour buttons update
   if (userOptions.textColor == "default") {
     btnDefaultTxt.classList.add("active");
   } else if (userOptions.textColor == "red") {
@@ -31,8 +31,18 @@ function updateUI() {
     btnBlueTxt.classList.add("active");
   } else if (userOptions.textColor == "green") {
     btnGreenTxt.classList.add("active");
+  } else if (userOptions.textColor == "black") {
+    btnBlackTxt.classList.add("active");
   }
-  // background buttons.
+
+  // background buttons update
+  if (userOptions.backgroundColor == "default") {
+    btnDefaultBg.classList.add("active");
+  } else if (userOptions.backgroundColor == "cream") {
+    btnCream.classList.add("active");
+  } else if (userOptions.backgroundColor == "grey") {
+    btnGrey.classList.add("active");
+  }
 
   //iterate through dropdown options and remove selected
   voiceSelect.value = userOptions.voiceOption;
@@ -140,6 +150,11 @@ let btnDefaultTxt = document.getElementById("btnDefaultTxt");
 let btnRedTxt = document.getElementById("btnRedTxt");
 let btnBlueTxt = document.getElementById("btnBlueTxt");
 let btnGreenTxt = document.getElementById("btnGreenTxt");
+let btnBlackTxt = document.getElementById("btnBlackTxt");
+
+let btnDefaultBg = document.getElementById("btnDefaultBg");
+let btnCream = document.getElementById("btnCream");
+let btnGrey = document.getElementById("btnGrey");
 
 btnRedTxt.addEventListener("click", (e) => {
   e.preventDefault();
@@ -156,26 +171,32 @@ btnGreenTxt.addEventListener("click", (e) => {
   userOptions.textColor = "green";
   setUserOptions();
 });
+btnBlackTxt.addEventListener("click", (e) => {
+  e.preventDefault();
+  userOptions.textColor = "black";
+  setUserOptions();
+});
+
 btnDefaultTxt.addEventListener("click", (e) => {
   e.preventDefault();
   userOptions.textColor = "default";
   setUserOptions();
 });
 
-btnCream.addEventListener("click", () => {
+btnCream.addEventListener("click", (e) => {
   e.preventDefault();
-  userOptions.backgroundColor = "#fffff2";
+  userOptions.backgroundColor = "cream";
   setUserOptions();
 });
 
-btnGrey.addEventListener("click", () => {
+btnGrey.addEventListener("click", (e) => {
   e.preventDefault();
   userOptions.backgroundColor = "grey";
   setUserOptions();
 });
 
-btnDefaultBg.addEventListener("click", () => {
+btnDefaultBg.addEventListener("click", (e) => {
   e.preventDefault();
-  userOptions.backgroundColor = "white";
+  userOptions.backgroundColor = "default";
   setUserOptions();
 });
