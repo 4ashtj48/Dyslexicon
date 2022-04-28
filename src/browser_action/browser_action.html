@@ -1,71 +1,98 @@
 <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dyslexicon Options</title>
 
+    <!--use something like this -->
+    <link rel="stylesheet" type="text/css" href="browser_action.css" />
+    <script src="browser_action.js" defer></script>
 
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
 
+    <!--use something like this -->
+  </head>
+  <body>
+    <div id="mainPopup">
+      <!--container fluid -->
 
-<style type="text/css">
-  #mainPopup {
-    padding: 10px;
-    height: 200px;
-    width: 400px;
-    font-family: Helvetica, Ubuntu, Arial, sans-serif;
-    border-radius: 25px;
-    border: 2px solid #73AD21;
-  }
-  h1 {
-    font-size: 1em;
-  }
-</style>
+      <button type="button" class="close" aria-label="Close"></button>
 
-<!--use something like this -->
-<link rel="stylesheet" type="text/css" href="browser_action.css" />
-<script src="js/jquery-3.1.1.min.js"></script>
-<!--use something like this -->
+      <h1>Dyslexicon Options</h1>
 
-<div id="mainPopup">
+      <div class="form-group">
+        <!--form group up to here -->
+      </div>
 
-  <button type="button" class="close" aria-label="Close"></button>
+      <!--https://www.w3schools.com/howto/howto_js_rangeslider.asp-->
 
-  <h1>Dyslexicon Options</h1>
+      <form class="mb-5">
+        <p>Voice Option</p>
+        <div class="form-group">
+          <select
+            id="voice-select"
+            class="form-control form-control-lg"
+          ></select>
+        </div>
 
-    <p>Voice Option</p>
-  
+        <div class="form-group">
+          <label for="rate">Rate</label>
+          <div id="rate-value" class="badge badge-primary float-right"></div>
+          <input
+            type="range"
+            id="rate"
+            class="custom-range"
+            min="0.5"
+            max="2"
+            value="1"
+            step="0.1"
+          />
+        </div>
 
-    <p>Rate</p>
+        <div class="form-group">
+          <label for="pitch">Pitch</label>
+          <div id="pitch-value" class="badge badge-primary float-right"></div>
+          <input
+            type="range"
+            id="pitch"
+            class="custom-range"
+            min="0"
+            max="2"
+            value="1"
+            step="0.1"
+          />
+        </div>
 
+        <div class="form-group">
+          <label for="textColour">Text Colour</label>
+          <!--https://www.w3schools.com/jsref/prop_style_color.asp-->
+          <div id="txtColContainer">
+            <button id="btnDefaultTxt" class="button">Default</button>
+            <button id="btnRedTxt" class="button">Red</button>
+            <button id="btnBlueTxt" class="button">Blue</button>
+            <button id="btnGreenTxt" class="button">Green</button>
+          </div>
+        </div>
 
-    <p>Pitch</p>
+        <div class="form-group">
+          <label for="bgColour">Background Colour</label>
+          <div id="bgColContainer">
+            <button id="btnDefaultBg" class="button">Default</button>
+            <button id="btnCream" class="button">Cream</button>
+            <button id="btnGrey" class="button">Grey</button>
+            <!--document.body.style.background -->
+          </div>
+        </div>
 
-    <div class="pitch-visible">
-      <span data-i18n="options_pitch_label"></span>
+        <!--https://www.w3schools.com/jsref/prop_style_backgroundcolor.asp-->
+      </form>
     </div>
-    <div class="pitch-visible">
-      <div
-        id="pitch"
-        class="slider"
-        data-min="0"
-        data-max="2"
-        data-steps="40"
-      ></div>
-    </div>
-
-    <p>Volume</p>
-    <div>
-      <span data-i18n="options_volume_label"></span>
-    </div>
-    <div>
-      <div
-        id="volume"
-        class="slider"
-        data-min="0.2"
-        data-max="1"
-        data-steps="40"
-      ></div>
-    </div>
-
-    <p>Text Colour</p>
-    <p>Text Size</p>
-    <p>Spacing?</p>
-
-  </div>
-</div>
+  </body>
+</html>

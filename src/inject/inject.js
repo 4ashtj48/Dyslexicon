@@ -3,44 +3,27 @@ var popupOptions = null;
 var exactText = "";
 var cursorX = 0;
 var cursorY = 0;
-
+let userOptions = {
+  voiceOption: "",
+  rate: 1,
+  pitch: 1,
+  textColor: "default",
+  textSize: "default",
+  backgroundColor: "default",
+};
+let voices = [];
 //--Init SpeechSynth API--//
 const synth = window.speechSynthesis;
 //global speech
-
-
-
 
 //Browser identifier
 // Firefox 1.0+
 var isFirefox = typeof InstallTrigger !== "undefined";
 // Chrome 1+
 var isChrome = !!window.chrome && !!window.chrome.webstore;
-
 const getVoices = () => {
   voices = synth.getVoices();
-
-  // Loop through voices and create an option for each one
-  voices.forEach((voice) => {
-    // Create option element
-    const option = document.createElement("option");
-    // Fill option with voice and language
-    option.textContent = voice.name + "(" + voice.lang + ")";
-
-    // Set needed option attributes
-    option.setAttribute("voice--lang", voice.lang);
-    option.setAttribute("voice--name", voice.name);
-    voiceSelect.appendChild(option);
-  });
 };
-
-
-
-
-
-
-
-
 
 //----functions----//
 
@@ -78,14 +61,14 @@ function unWrapElement(span) {
 }
 
 async function removeSelectedElement() {
-  var spans = document.getElementsByClassName("dyslexicon--selected");
-  if (spans.length > 0) {
-    for (let c = 0; c < spans.length; c++) {
-      let span = spans[c];
-      span.removeAttribute("style");
-      span.classList.add("disabled");
-      span.classList.remove("active");
-      span.id = "";
+  var elements = document.getElementsByClassName("dyslexicon--selected");
+  if (elements.length > 0) {
+    for (let c = 0; c < elements.length; c++) {
+      let element = elements[c];
+      element.removeAttribute("style");
+      element.classList.add("disabled");
+      element.classList.remove("active");
+      element.removeAttribute("data-dyslexicon");
     }
 
     //  await unWrapElement(span);
@@ -96,25 +79,42 @@ async function removeSelectedElement() {
 //change
 //breaks on non-text node.
 
-function surroundSelection() {
-  try {
-    var span = document.createElement("span");
-    //span.style.fontWeight = "bold";
-    span.classList.add("dyslexicon--selected");
-    span.classList.add("active");
-    span.id = "dyslexiconSelected";
-    if (window.getSelection) {
-      var sel = window.getSelection();
-      if (sel.rangeCount) {
-        var range = sel.getRangeAt(0).cloneRange();
-        range.surroundContents(span);
-        sel.removeAllRanges();
-        sel.addRange(range);
+// function surroundSelection() {
+//   try {
+//     var span = document.createElement("span");
+//     //span.style.fontWeight = "bold";
+//     span.classList.add("dyslexicon--selected");
+//     span.classList.add("active");
+//     span.id = "dyslexiconSelected";
+//     if (window.getSelection) {
+//       var sel = window.getSelection();
+//       if (sel.rangeCount) {
+//         var range = sel.getRangeAt(0).cloneRange();
+//         range.surroundContents(span);
+//         sel.removeAllRanges();
+//         sel.addRange(range);
+//       }
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+function getSelectionParentElement() {
+  var parentEl = null,
+    sel;
+  if (window.getSelection) {
+    sel = window.getSelection();
+    if (sel.rangeCount) {
+      parentEl = sel.getRangeAt(0).commonAncestorContainer;
+      if (parentEl.nodeType != 1) {
+        parentEl = parentEl.parentNode;
       }
     }
-  } catch (error) {
-    console.log(error);
+  } else if ((sel = document.selection) && sel.type != "Control") {
+    parentEl = sel.createRange().parentElement();
   }
+  return parentEl;
 }
 
 function createButtons() {
@@ -148,11 +148,11 @@ function createButtons() {
   decreaseButton.addEventListener("click", decreaseFontOperation);
   popupOptions.append(decreaseButton);
 
-  let customButton = document.createElement("button");
-  customButton.innerText = "Custom";
-  customButton.classList.add("dyslexicon");
-  customButton.addEventListener("click", customOperation);
-  popupOptions.append(customButton);
+  // let customButton = document.createElement("button");
+  // customButton.innerText = "Custom";
+  // customButton.classList.add("dyslexicon");
+  // customButton.addEventListener("click", customOperation);
+  // popupOptions.append(customButton);
 
   //new buttons here
 }
@@ -162,9 +162,29 @@ function playButtonOperation(e) {
   synth.cancel();
   console.log("Playing the text");
   console.log(exactText);
-  var msg = new SpeechSynthesisUtterance();
-  msg.text = exactText;
-  synth.speak(msg);
+  chrome.storage.sync.get(["userOption"], function (result) {
+    var msg = new SpeechSynthesisUtterance();
+
+    if (result.userOption) {
+      userOptions = result.userOption;
+      let pickedVoice = null;
+      for (let c = 0; c < voices.length; c++) {
+        let voice = voices[c];
+        if (voice.name == userOptions.voiceOption) {
+          pickedVoice = voice;
+        }
+      }
+      // get that user voice from the voices array so it matches picked option
+      if (pickedVoice !== null) {
+        msg.voice = pickedVoice;
+      }
+
+      //  rate and pitch from the user option
+    }
+
+    msg.text = exactText;
+    synth.speak(msg);
+  });
 }
 
 function pauseButtonOperation(e) {
@@ -195,30 +215,42 @@ function getStyle(el, styleProp) {
 //add the functions here
 function increaseFontOperation(e) {
   e.preventDefault();
-  console.log("Increase font size");
-  var span = document.getElementById("dyslexiconSelected");
-  if (span) {
-    span.classList.add("font--increase");
-    let currentsize = window.getComputedStyle(span).fontSize.match(/\d+/)[0]; // "3"
-    span.style.fontSize = currentsize * 2 + "px";
+  let selectedElement = document.querySelectorAll(
+    "[data-dyslexicon='dyslexicon']"
+  );
+
+  if (selectedElement.length > 0) {
+    selectedElement = selectedElement[0];
+    selectedElement.classList.add("font--increase");
+    let currentsize = window
+      .getComputedStyle(selectedElement)
+      .fontSize.match(/\d+/)[0]; // "3"
+    selectedElement.style.fontSize = currentsize * 2 + "px";
   }
 }
 function decreaseFontOperation(e) {
   e.preventDefault();
-  console.log("Decrease font size");
-  var span = document.getElementById("dyslexiconSelected");
-  if (span) {
-    span.classList.add("font--decrease");
-    let currentsize = window.getComputedStyle(span).fontSize.match(/\d+/)[0]; // "3"
-    span.style.fontSize = currentsize / 2 + "px";
+
+  let selectedElement = document.querySelectorAll(
+    "[data-dyslexicon='dyslexicon']"
+  );
+  if (selectedElement.length > 0) {
+    selectedElement = selectedElement[0];
+    selectedElement.classList.add("font--decrease");
+    let currentsize = window
+      .getComputedStyle(selectedElement)
+      .fontSize.match(/\d+/)[0];
+    let sizeToBe = currentsize / 2;
+    if (sizeToBe > 1) {
+      selectedElement.style.fontSize = `${sizeToBe}px`;
+    }
   }
 }
 
-function customOperation(e) {
-  e.preventDefault();
-  console.log("apply custom");
-  //grab custom settings from browser_action.
-}
+// function customOperation(e) {
+//   e.preventDefault();
+//   console.log("apply custom");
+// }
 
 function showOptionsPopup() {
   if (!popupOptions.classList.contains("show")) {
@@ -231,16 +263,24 @@ function hideOptionsPopup() {
   popupOptions.classList.remove("show");
 }
 
+function setHighlightColors() {
+  chrome.storage.sync.get(["userOption"], function (result) {
+    userOptions = result.userOption;
+    document.body.classList.add(`dyslexicon-text-${userOptions.textColor}`);
+    document.body.classList.add(
+      `dyslexicon-background-${userOptions.backgroundColor}`
+    );
+  });
+}
 chrome.extension.sendMessage({}, function (response) {
   var readyStateCheckInterval = setInterval(function () {
     if (document.readyState === "complete") {
       clearInterval(readyStateCheckInterval);
 
-      // ----------------------------------------------------------
-      // This part of the script triggers when page is done loading
-      console.log("Hello. This message was sent from scripts/inject.js");
-      // ----------------------------------------------------------
       createButtons();
+      getVoices();
+      setHighlightColors();
+
       window.addEventListener("click", (event) => {
         if (
           testOptionsShowing &&
@@ -268,7 +308,12 @@ chrome.extension.sendMessage({}, function (response) {
           exactText = window.getSelection().toString();
           if (exactText.length > 0) {
             setTimeout(() => {
-              surroundSelection();
+              let parentEl = getSelectionParentElement();
+              parentEl.classList.add("dyslexicon--selected");
+              parentEl.classList.add("active");
+              //setting attribute
+              parentEl.setAttribute("data-dyslexicon", "dyslexicon");
+              // surroundSelection();
               showOptionsPopup();
             }, 100);
           } else {
@@ -276,7 +321,6 @@ chrome.extension.sendMessage({}, function (response) {
             removeSelectedElement();
             console.log("event remove 1");
           }
-          //window.getSelection().toString()--- section highlighted
         } else {
           hideOptionsPopup();
           removeSelectedElement();

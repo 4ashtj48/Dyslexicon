@@ -8,10 +8,6 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "background": {
-    "scripts": ["src/bg/background.js"],
-    "persistent": true
-  },
 
   "browser_action": {
     "default_icon": "icons/icon19.png",
@@ -24,7 +20,10 @@
     "tts",
     "ttsEngine",
     "tabs",
-    "https://*/*"
+    "https://*/*",
+    "storage",
+    "activeTab",
+    "scripting"
   ],
   "content_scripts": [
     {
@@ -34,6 +33,10 @@
     {
       "matches": ["https://*/*"],
       "js": ["src/inject/inject.js"]
+    },
+    {
+      "matches": ["https://*/*"],
+      "js": ["src/browser_action/browser_action.js"]
     }
   ]
 }

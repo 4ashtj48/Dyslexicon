@@ -1,8 +1,3 @@
-/**
- * Place your custom CSS styles here.
- **/
-
-
 
 div#dyslexiconPopUp {
     display: none;
@@ -25,4 +20,52 @@ div#dyslexiconPopUp > button {
 div#dyslexiconPopUp > button:hover {
     background: #ececec;
 }
+
+  .dyslexicon-text-default *::selection {
+    color: white; /* WebKit/Blink Browsers */
+  }
+  .dyslexicon-text-default *::-moz-selection {
+      color: white;
+  }
+
+  .dyslexicon-text-green *::selection {
+    color: green; /* WebKit/Blink Browsers */
+  }
+  .dyslexicon-text-green *::-moz-selection {
+      color: green;
+  }
+  .dyslexicon-text-red *::selection {
+    color: red; /* WebKit/Blink Browsers */
+  }
+  .dyslexicon-text-red *::-moz-selection {
+      color: red;
+  }
+  .dyslexicon-text-blue *::selection {
+    color: blue; /* WebKit/Blink Browsers */
+  }
+  .dyslexicon-text-blue *::-moz-selection {
+      color: blue;
+  }
+  
+
+  .dyslexicon-background-default *::selection {
+    background-color: #3297FD; /* WebKit/Blink Browsers */
+  }
+  .dyslexicon-background-default *::-moz-selection {
+    background-color:blue;
+  }
+
+  .dyslexicon-background-cream *::selection {
+    background-color:#ebdc92; /* WebKit/Blink Browsers */
+  }
+  .dyslexicon-background-cream *::-moz-selection {
+    background-color:#ebdc92;
+  }
+
+  .dyslexicon-background-grey *::selection {
+    background-color:grey; /* WebKit/Blink Browsers */
+  }
+  .dyslexicon-background-grey *::-moz-selection {
+    background-color:grey;
+  }
 

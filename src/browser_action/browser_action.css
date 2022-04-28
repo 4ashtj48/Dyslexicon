@@ -1,66 +1,115 @@
 
 
+
 /* change font family */
-body {
-    margin: 0;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",
-    Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
+#mainPopup {
+  padding: 10px;
+   font-family: Helvetica, Ubuntu, Arial, sans-serif;
+  border-radius: 25px;
+  border: 2px solid #73ad21;
+  width: 400px;
+}
+
+.mainPopup {
+  padding-left: 15px;
+  padding-right: 15px;
+  
+}
+
+
+.txtColContainer{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+
+select#voice-select {
+font-size: 16px;
+}
+
+
+  h1 {
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
   }
 
 
+  
+  select.form-control:not([size]):not([multiple]) {
+    height: calc(2.25rem + 2px);
+  }
 
-button.close {
+  input {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  input[type=checkbox], input[type=radio] {
     padding: 0;
-    background-color: transparent;
-    border: 0;
-    -webkit-appearance: none;
+  }
+
+  .btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  .btn:not(:disabled) {
+    cursor: pointer;
+  }
+
+  #rate-input-div {
     display: none;
   }
   
-  .close {
-    float: right;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1;
-    color: black;
-    text-shadow: 0 1px 0 white;
-    opacity: .5;
-  }
-  .close:not(:disabled) {
-    cursor: pointer;
-  }
-  .close:hover {
-    color: black;
-    text-decoration: none;
-    opacity: .75;
-  }
+  select#text-size {
+    font-size: 16px;
+}
+
+.button {
+  background: none;
+  border: 2px solid black;
+  padding: 10px 15px;
+  opacity: 0.3;
+  outline: none;
+}
+
+.button.active {
+  opacity: 1;
+  font-weight: 700;
+}
+
+button#btnRedTxt {color: red;}
+
+button#btnDefaultTxt {color: black;}
+
+button#btnBlueTxt {color: blue;}
+
+button#btnGreenTxt {color: green;}
 
 
-
-/* from read-aloud.*/
-.slider {
-    position: relative;
-    height: .8em;
-    border-radius: 1em;
-    background-image: linear-gradient(#888, #959595, #a7a7a7, #b4b4b4);
-    margin: 0 .25em;
-  }
-  .slider > .bar {
-    position: absolute;
-    height: 100%;
-    border-radius: 1em;
-    background: linear-gradient(#59928b, #84d1c9, #3e8790);
-  }
-  .slider > .knob {
-    position: absolute;
-    cursor: ew-resize;
-    margin: -.4em 0 0 -.5em;
-    width: 1em;
-    height: 1.6em;
-    border-radius: .4em;
-    background: linear-gradient(to right, #2a737b, #77bbb3, #77bbb3, #2a737b);
-    touch-action: none;
-  }
+button#btnCream {
+  background-color:#fffff2 ;
+}
+button#btnGrey {
+  background-color:#D3D3D3 ;
+}
