@@ -11,22 +11,9 @@ let userOptions = {
   textColor: "default",
   textSize: "default",
   backgroundColor: "default",
-  font: "verdana",
 };
-
 let voices = [];
 var msg = null;
-let fonts = [
-  "arial",
-  "verdana",
-  "helvetica",
-  "tahoma",
-  "trebuchet-ms",
-  "times-new-roman",
-  "georgia",
-  "garamond",
-  "courier-new",
-];
 
 //--Init SpeechSynth API--//
 const synth = window.speechSynthesis;
@@ -36,7 +23,7 @@ const synth = window.speechSynthesis;
 // Firefox 1.0+
 var isFirefox = typeof InstallTrigger !== "undefined";
 // Chrome 1+
-var isChrome = !!window.chrome && !!window.chrome.webstore;
+var isChrome = !!window.chrome && !!window.browser.webstore;
 const getVoices = () => {
   voices = synth.getVoices();
 };
@@ -167,18 +154,17 @@ function createButtons() {
   //new buttons here
 }
 
+//message = new speechsythutterance
+
 function playButtonOperation(e) {
   e.preventDefault();
-
+  synth.cancel();
   console.log("Playing the text");
   console.log(exactText);
-  chrome.storage.sync.get(["userOption"], function (result) {
-    let msgNullTest = msg;
+  browser.storage.sync.get(["userOption"], function (result) {
+    console.log("hello");
     console.log(result);
-    console.log(msgNullTest);
-    if (msgNullTest == null) {
-      msg = new SpeechSynthesisUtterance();
-    }
+
     if (result.userOption) {
       userOptions = result.userOption;
       let pickedVoice = null;
@@ -202,24 +188,27 @@ function playButtonOperation(e) {
         msg.pitch = userOptions.pitch;
       }
     }
-    if (msgNullTest !== null) {
+    if (msg !== null) {
       synth.resume();
       console.log("resume");
     } else {
+      console.log("create new ssu");
+      msg = new SpeechSynthesisUtterance();
       msg.text = exactText;
       msg.addEventListener("end", (event) => {
         msg = null;
+        console.log("ended");
       });
       synth.speak(msg);
     }
   });
 }
+
 function pauseButtonOperation(e) {
   e.preventDefault();
   console.log("Pausing");
   console.log(exactText);
   synth.pause();
-  console.log(msg);
 }
 
 function getStyle(el, styleProp) {
@@ -293,18 +282,8 @@ function hideOptionsPopup() {
 
 ///allow change from background options user option
 
-function setParentFont() {
-  chrome.storage.sync.get(["userOption"], function (result) {
-    userOptions = result.userOption;
-    for (let c = 0; c < fonts.length; c++) {
-      document.body.classList.remove(`dyslexicon-font-${fonts[c]}`);
-    }
-    document.body.classList.add(`dyslexicon-font-${userOptions.font}`);
-  });
-}
-
 function setHighlightColors() {
-  chrome.storage.sync.get(["userOption"], function (result) {
+  browser.storage.sync.get(["userOption"], function (result) {
     userOptions = result.userOption;
     document.body.classList.add(`dyslexicon-text-${userOptions.textColor}`);
     document.body.classList.add(
@@ -313,7 +292,7 @@ function setHighlightColors() {
   });
 }
 
-//chrome.extension.sendMessage({}, function (response) {
+//browser.extension.sendMessage({}, function (response) {
 (function () {
   var readyStateCheckInterval = setInterval(function () {
     if (document.readyState === "complete") {
@@ -322,7 +301,6 @@ function setHighlightColors() {
       createButtons();
       getVoices();
       setHighlightColors();
-      setParentFont();
 
       window.addEventListener("click", (event) => {
         if (
@@ -352,13 +330,10 @@ function setHighlightColors() {
           if (exactText.length > 0) {
             setTimeout(() => {
               let parentEl = getSelectionParentElement();
-              if (parentEl) {
-                parentEl.classList.add("dyslexicon--selected");
-                parentEl.classList.add("active");
-                //setting attribute
-                parentEl.setAttribute("data-dyslexicon", "dyslexicon");
-              }
-              setParentFont();
+              parentEl.classList.add("dyslexicon--selected");
+              parentEl.classList.add("active");
+              //setting attribute
+              parentEl.setAttribute("data-dyslexicon", "dyslexicon");
               // surroundSelection();
               showOptionsPopup();
             }, 100);

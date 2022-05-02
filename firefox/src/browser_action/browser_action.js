@@ -4,33 +4,18 @@ let userOptions = {
   pitch: 1,
   textColor: "default",
   backgroundColor: "default",
-  font: "arial",
 };
 
-//set default font above
-
-const fontPicker = document.getElementById("fontPicker");
 const rate = document.getElementById("rate");
 const pitch = document.getElementById("pitch");
 const rateValue = document.getElementById("rate-value");
 const pitchValue = document.getElementById("pitch-value");
-
-fontPicker.onchange = fontValueChanged;
-
-function fontValueChanged(e) {
-  e.preventDefault();
-  userOptions.font = fontPicker.value;
-  setUserOptions();
-}
 
 function updateUI() {
   rate.value = userOptions.rate;
   rateValue.innerText = userOptions.rate;
   pitch.value = userOptions.pitch;
   pitchValue.innerText = userOptions.pitch;
-  fontPicker.value = userOptions.font;
-  document.body.className = "";
-  document.body.classList.add(`dyslexicon-font-${userOptions.font}`);
 
   //Button Setting class
   let buttons = document.getElementsByClassName("button");
@@ -66,7 +51,7 @@ function updateUI() {
 }
 
 function getUserOptions() {
-  chrome.storage.sync.get(["userOption"], function (result) {
+  browser.storage.sync.get(["userOption"], function (result) {
     if (result.userOption) {
       userOptions = result.userOption;
     }
@@ -76,13 +61,15 @@ function getUserOptions() {
 }
 
 function setUserOptions() {
-  chrome.storage.sync.set({ userOption: userOptions }, function () {
+  browser.storage.sync.set({ userOption: userOptions }, function () {
     console.log("User options have been set");
     console.log(userOptions);
     updateUI();
   });
 }
 getUserOptions();
+
+
 
 // Init SpeechSynth API
 const synth = window.speechSynthesis;
