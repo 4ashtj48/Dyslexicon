@@ -12,6 +12,7 @@ let userOptions = {
   textSize: "default",
   backgroundColor: "default",
   font: "verdana",
+  extRunning: true,
 };
 
 let voices = [];
@@ -36,7 +37,12 @@ const synth = window.speechSynthesis;
 // Firefox 1.0+
 var isFirefox = typeof InstallTrigger !== "undefined";
 // Chrome 1+
-var isChrome = !!window.chrome && !!window.chrome.webstore;
+var isChrome = !!window.chrome;
+let client = chrome;
+if (isFirefox) {
+  client = browser;
+}
+
 const getVoices = () => {
   voices = synth.getVoices();
 };
@@ -172,7 +178,7 @@ function playButtonOperation(e) {
 
   console.log("Playing the text");
   console.log(exactText);
-  chrome.storage.sync.get(["userOption"], function (result) {
+  client.storage.sync.get(["userOption"], function (result) {
     let msgNullTest = msg;
     console.log(result);
     console.log(msgNullTest);
@@ -294,7 +300,7 @@ function hideOptionsPopup() {
 ///allow change from background options user option
 
 function setParentFont() {
-  chrome.storage.sync.get(["userOption"], function (result) {
+  client.storage.sync.get(["userOption"], function (result) {
     userOptions = result.userOption;
     for (let c = 0; c < fonts.length; c++) {
       document.body.classList.remove(`dyslexicon-font-${fonts[c]}`);
@@ -302,9 +308,8 @@ function setParentFont() {
     document.body.classList.add(`dyslexicon-font-${userOptions.font}`);
   });
 }
-
 function setHighlightColors() {
-  chrome.storage.sync.get(["userOption"], function (result) {
+  client.storage.sync.get(["userOption"], function (result) {
     userOptions = result.userOption;
     document.body.classList.add(`dyslexicon-text-${userOptions.textColor}`);
     document.body.classList.add(
@@ -313,16 +318,39 @@ function setHighlightColors() {
   });
 }
 
-//chrome.extension.sendMessage({}, function (response) {
-(function () {
-  var readyStateCheckInterval = setInterval(function () {
+function setOnOffClass() {
+  document.body.classList.remove("dyslexicon--off");
+  if (userOptions.extRunning == false) {
+    document.body.classList.add("dyslexicon--off");
+  }
+}
+
+async function getUserOptions() {
+  return new Promise((resolve, reject) => {
+    client.storage.sync.get(["userOption"], function (result) {
+      if (result["userOption"] === undefined) {
+        reject();
+      }
+      userOptions = result.userOption;
+      console.log("getuseroptions");
+      resolve();
+    });
+  });
+}
+
+//client.extension.sendMessage({}, function (response) {
+//onpageload
+(async function () {
+  var readyStateCheckInterval = setInterval(async function () {
     if (document.readyState === "complete") {
       clearInterval(readyStateCheckInterval);
 
+      await getUserOptions();
       createButtons();
       getVoices();
       setHighlightColors();
       setParentFont();
+      setOnOffClass();
 
       window.addEventListener("click", (event) => {
         if (
@@ -341,15 +369,17 @@ function setHighlightColors() {
       //     console.log("scroll event remove");
       //   }
       // });
-      document.addEventListener("mouseup", (event) => {
+      document.addEventListener("mouseup", async (event) => {
         //highlighting text functionality
         //cursor location
+        await getUserOptions();
+        setOnOffClass();
         cursorX = event.clientX;
         cursorY = event.clientY;
         if (window.getSelection().toString().length) {
           //obtaining exact (highlighted text)
           exactText = window.getSelection().toString();
-          if (exactText.length > 0) {
+          if (exactText.length > 0 && userOptions.extRunning) {
             setTimeout(() => {
               let parentEl = getSelectionParentElement();
               if (parentEl) {

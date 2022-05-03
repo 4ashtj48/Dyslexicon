@@ -26,90 +26,93 @@ div#dyslexiconPopUp > button:hover {
 button.dyslexicon {
    background-color: white !important;
     color: black !important;
+    padding: 5px !important ;
 }
 
-  .dyslexicon-text-default *::selection {
+
+
+  .dyslexicon-text-default:not(.dyslexicon--off) *::selection {
     color: white; /* WebKit/Blink Browsers */
   }
-  .dyslexicon-text-default *::-moz-selection {
+  .dyslexicon-text-default:not(.dyslexicon--off) *::-moz-selection {
       color: white;
   }
 
-  .dyslexicon-text-green *::selection {
+  .dyslexicon-text-green:not(.dyslexicon--off) *::selection {
     color: green; /* WebKit/Blink Browsers */
   }
-  .dyslexicon-text-green *::-moz-selection {
+  .dyslexicon-text-green:not(.dyslexicon--off) *::-moz-selection {
       color: green;
   }
-  .dyslexicon-text-red *::selection {
+  .dyslexicon-text-red:not(.dyslexicon--off) *::selection {
     color: red; /* WebKit/Blink Browsers */
   }
-  .dyslexicon-text-red *::-moz-selection {
+  .dyslexicon-text-red:not(.dyslexicon--off) *::-moz-selection {
       color: red;
   }
-  .dyslexicon-text-blue *::selection {
+  .dyslexicon-text-blue:not(.dyslexicon--off) *::selection {
     color: blue; /* WebKit/Blink Browsers */
   }
-  .dyslexicon-text-blue *::-moz-selection {
+  .dyslexicon-text-blue:not(.dyslexicon--off) *::-moz-selection {
       color: blue;
   }
 
-  .dyslexicon-text-black *::selection {
+  .dyslexicon-text-black:not(.dyslexicon--off) *::selection {
     color: black; /* WebKit/Blink Browsers */
   }
-  .dyslexicon-text-blue *::-moz-selection {
+  .dyslexicon-text-blue:not(.dyslexicon--off) *::-moz-selection {
       color: black;
   }
   
 
-  .dyslexicon-background-default *::selection {
+  .dyslexicon-background-default:not(.dyslexicon--off) *::selection {
     background-color: #3297FD; /* WebKit/Blink Browsers */
   }
-  .dyslexicon-background-default *::-moz-selection {
+  .dyslexicon-background-default:not(.dyslexicon--off) *::-moz-selection {
     background-color:blue;
   }
 
-  .dyslexicon-background-cream *::selection {
+  .dyslexicon-background-cream:not(.dyslexicon--off) *::selection {
     background-color:#F8F0E3; /* WebKit/Blink Browsers */
   }
-  .dyslexicon-background-cream *::-moz-selection {
+  .dyslexicon-background-cream:not(.dyslexicon--off) *::-moz-selection {
     background-color:#F8F0E3;
   }
 
-  .dyslexicon-background-grey *::selection {
+  .dyslexicon-background-grey:not(.dyslexicon--off) *::selection {
     background-color:grey; /* WebKit/Blink Browsers */
   }
-  .dyslexicon-background-grey *::-moz-selection {
+  .dyslexicon-background-grey:not(.dyslexicon--off) *::-moz-selection {
     background-color:grey;
   }
 
 
-  .dyslexicon-font-arial .dyslexicon--selected.active {
-    font-family:Arial, ;
+  .dyslexicon-font-arial:not(.dyslexicon--off) .dyslexicon--selected.active {
+    font-family: 'Arial' ;
   }
-  .dyslexicon-font-verdana .dyslexicon--selected.active {
-    font-family:Verdana, ;
+  .dyslexicon-font-verdana:not(.dyslexicon--off) .dyslexicon--selected.active {
+    font-family: 'Verdana' ;
   }
-  .dyslexicon-font-helvetica .dyslexicon--selected.active {
-    font-family:Helvetica, ;
+  .dyslexicon-font-helvetica:not(.dyslexicon--off) .dyslexicon--selected.active {
+    font-family: 'Helvetica' ;
   }
-  .dyslexicon-font-Tahoma .dyslexicon--selected.active {
-    font-family:Arial, ;
+  .dyslexicon-font-Tahoma:not(.dyslexicon--off) .dyslexicon--selected.active {
+    font-family: 'Tahoma' ;
   }
-  .dyslexicon-font-trebuchet-ms .dyslexicon--selected.active {
+  .dyslexicon-font-trebuchet-ms:not(.dyslexicon--off) .dyslexicon--selected.active {
     font-family:'Trebuchet MS';  }
 
-  .dyslexicon-font-times-new-roman .dyslexicon--selected.active {
+  .dyslexicon-font-times-new-roman:not(.dyslexicon--off) .dyslexicon--selected.active {
     font-family:'Times New Roman' ;
   }
 
-  .dyslexicon-font-georgia .dyslexicon--selected.active {
+  .dyslexicon-font-georgia:not(.dyslexicon--off) .dyslexicon--selected.active {
     font-family:'Georgia' ;
   }
-  .dyslexicon-font-garamond .dyslexicon--selected.active {
+  .dyslexicon-font-garamond:not(.dyslexicon--off) .dyslexicon--selected.active {
     font-family:'Garamond' ;
   }
-  .dyslexicon-font-courier-new .dyslexicon--selected.active {
+  .dyslexicon-font-courier-new:not(.dyslexicon--off) .dyslexicon--selected.active {
     font-family:'Courier New' ;
   }
 

@@ -1,7 +1,7 @@
 
 
 
-/* change font family */
+
 #mainPopup {
   padding: 10px;
    border: 2px solid #73ad21;
@@ -90,16 +90,16 @@ button#btnDefaultBg {
 }
 
 .dyslexicon-font-arial  {
-  font-family:Arial, ;
+  font-family:'Arial';
 }
 .dyslexicon-font-verdana  {
-  font-family:Verdana, ;
+  font-family:'Verdana';
 }
 .dyslexicon-font-helvetica  {
-  font-family:Helvetica, ;
+  font-family:'Helvetica'  ;
 }
-.dyslexicon-font-Tahoma  {
-  font-family:Arial, ;
+.dyslexicon-font-tahoma  {
+  font-family:'Tahoma' ;
 }
 .dyslexicon-font-trebuchet-ms  {
   font-family:'Trebuchet MS';  }
@@ -107,7 +107,6 @@ button#btnDefaultBg {
 .dyslexicon-font-times-new-roman  {
   font-family:'Times New Roman' ;
 }
-
 .dyslexicon-font-georgia  {
   font-family:'Georgia' ;
 }

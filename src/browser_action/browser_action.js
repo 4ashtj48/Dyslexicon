@@ -1,14 +1,24 @@
+let client = chrome;
+
+var isFirefox = typeof InstallTrigger !== "undefined";
+//var isChrome = !!window.chrome;
+
+if (isFirefox) {
+  client = browser;
+}
+
 let userOptions = {
   voiceOption: "",
   rate: 1,
   pitch: 1,
   textColor: "default",
   backgroundColor: "default",
-  font: "arial",
+  font: "verdana",
+  extRunning: true,
 };
 
-//set default font above
-
+const extOn = document.getElementById("extOn");
+const extOff = document.getElementById("extOff");
 const fontPicker = document.getElementById("fontPicker");
 const rate = document.getElementById("rate");
 const pitch = document.getElementById("pitch");
@@ -31,6 +41,19 @@ function updateUI() {
   fontPicker.value = userOptions.font;
   document.body.className = "";
   document.body.classList.add(`dyslexicon-font-${userOptions.font}`);
+
+  extOn.classList.remove("btn-secondary");
+  extOff.classList.remove("btn-secondary");
+  extOn.classList.remove("btn-primary");
+  extOff.classList.remove("btn-primary");
+
+  if (userOptions.extRunning) {
+    extOn.classList.add("btn-primary");
+    extOff.classList.add("btn-secondary");
+  } else {
+    extOff.classList.add("btn-primary");
+    extOn.classList.add("btn-secondary");
+  }
 
   //Button Setting class
   let buttons = document.getElementsByClassName("button");
@@ -66,7 +89,7 @@ function updateUI() {
 }
 
 function getUserOptions() {
-  chrome.storage.sync.get(["userOption"], function (result) {
+  client.storage.sync.get(["userOption"], function (result) {
     if (result.userOption) {
       userOptions = result.userOption;
     }
@@ -76,7 +99,7 @@ function getUserOptions() {
 }
 
 function setUserOptions() {
-  chrome.storage.sync.set({ userOption: userOptions }, function () {
+  client.storage.sync.set({ userOption: userOptions }, function () {
     console.log("User options have been set");
     console.log(userOptions);
     updateUI();
@@ -200,5 +223,16 @@ btnGrey.addEventListener("click", (e) => {
 btnDefaultBg.addEventListener("click", (e) => {
   e.preventDefault();
   userOptions.backgroundColor = "default";
+  setUserOptions();
+});
+
+extOn.addEventListener("click", (e) => {
+  e.preventDefault();
+  userOptions.extRunning = true;
+  setUserOptions();
+});
+extOff.addEventListener("click", (e) => {
+  e.preventDefault();
+  userOptions.extRunning = false;
   setUserOptions();
 });
