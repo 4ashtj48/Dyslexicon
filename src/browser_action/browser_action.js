@@ -1,5 +1,6 @@
 let client = chrome;
 
+
 var isFirefox = typeof InstallTrigger !== "undefined";
 //var isChrome = !!window.chrome;
 
