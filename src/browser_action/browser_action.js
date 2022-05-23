@@ -101,7 +101,6 @@ function getUserOptions() {
 
 function setUserOptions() {
   client.storage.sync.set({ userOption: userOptions }, function () {
-    console.log("User options have been set");
     console.log(userOptions);
     updateUI();
   });
@@ -110,7 +109,6 @@ getUserOptions();
 
 // Init SpeechSynth API
 const synth = window.speechSynthesis;
-//https://stackoverflow.com/questions/42694586/how-to-change-voice-in-speech-synthesis
 var voiceSelect = document.getElementById("voice-select");
 voiceSelect.onchange = voiceValueChanged;
 
@@ -145,8 +143,7 @@ let voices = [];
 
 const getVoices = () => {
   voices = synth.getVoices();
-  console.log(voices);
-
+  
   // Loop through voices and create an option for each one
   voices.forEach((voice) => {
     // Create option element
@@ -167,7 +164,6 @@ if (synth.onvoiceschanged !== undefined) {
   synth.onvoiceschanged = getVoices;
 }
 
-//const selectedVoice = voiceSelect.selectedOptions[0].getAttribute("data-name");
 
 // EVENT LISTENERS
 

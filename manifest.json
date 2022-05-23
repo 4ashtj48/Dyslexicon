@@ -14,7 +14,7 @@
     "default_title": "browser action",
     "default_popup": "src/browser_action/browser_action.html"
   },
-  "permissions": ["tts", "ttsEngine", "https://*/*", "http://*/*", "storage"],
+  "permissions": ["https://*/*", "http://*/*", "storage"],
   "content_scripts": [
     {
       "matches": ["https://*/*"],

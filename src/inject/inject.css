@@ -22,7 +22,6 @@ div#dyslexiconPopUp > button:hover {
     background-color: white;
     color: black;
 }
-
 button.dyslexicon {
    background-color: white !important;
     color: black !important;
@@ -64,7 +63,6 @@ button.dyslexicon {
       color: black;
   }
   
-
   .dyslexicon-background-default:not(.dyslexicon--off) *::selection {
     background-color: #3297FD; /* WebKit/Blink Browsers */
   }

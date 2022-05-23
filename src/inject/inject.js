@@ -82,6 +82,8 @@ function unWrapElement(span) {
   return;
 }
 
+//removes the attribute and style.
+
 async function removeSelectedElement() {
   var elements = document.getElementsByClassName("dyslexicon--selected");
   if (elements.length > 0) {
@@ -98,11 +100,10 @@ async function removeSelectedElement() {
   }
 }
 
-//change
+//change--removed
 //breaks on non-text node.
-
-// function surroundSelection() {
-//   try {
+//  function surroundSelection() {
+//    try {
 //     var span = document.createElement("span");
 //     //span.style.fontWeight = "bold";
 //     span.classList.add("dyslexicon--selected");
@@ -140,9 +141,7 @@ function getSelectionParentElement() {
 }
 
 function createButtons() {
-  console.log("Creating Buttons ");
   if (testOptionsExists() == false) createPopupOptions();
-  // change font to options
 
   let playButton = document.createElement("button");
   playButton.innerText = "Play";
@@ -175,13 +174,12 @@ function createButtons() {
 
 function playButtonOperation(e) {
   e.preventDefault();
+  //console.log("Playing the text");
 
-  console.log("Playing the text");
-  console.log(exactText);
   client.storage.sync.get(["userOption"], function (result) {
     let msgNullTest = msg;
-    console.log(result);
-    console.log(msgNullTest);
+    //console.log(result);
+    //console.log(msgNullTest);
     if (msgNullTest == null) {
       msg = new SpeechSynthesisUtterance();
     }
@@ -194,7 +192,7 @@ function playButtonOperation(e) {
           pickedVoice = voice;
         }
       }
-      // get that user voice from the voices array so it matches picked option
+      // get  user voice from array so it matches picked option
       if (pickedVoice !== null) {
         msg.voice = pickedVoice;
       }
@@ -210,7 +208,7 @@ function playButtonOperation(e) {
     }
     if (msgNullTest !== null) {
       synth.resume();
-      console.log("resume");
+      //console.log("resume");
     } else {
       msg.text = exactText;
       msg.addEventListener("end", (event) => {
@@ -223,9 +221,7 @@ function playButtonOperation(e) {
 function pauseButtonOperation(e) {
   e.preventDefault();
   console.log("Pausing");
-  console.log(exactText);
   synth.pause();
-  console.log(msg);
 }
 
 function getStyle(el, styleProp) {
@@ -258,7 +254,7 @@ function increaseFontOperation(e) {
     selectedElement.classList.add("font--increase");
     let currentsize = window
       .getComputedStyle(selectedElement)
-      .fontSize.match(/\d+/)[0]; // "3"
+      .fontSize.match(/\d+/)[0]; 
     selectedElement.style.fontSize = currentsize * 1.4 + "px";
   }
 }
@@ -338,7 +334,6 @@ async function getUserOptions() {
   });
 }
 
-//client.extension.sendMessage({}, function (response) {
 //onpageload
 (async function () {
   var readyStateCheckInterval = setInterval(async function () {
@@ -362,13 +357,7 @@ async function getUserOptions() {
           console.log("click event remove");
         }
       });
-      // window.addEventListener("scroll", (event) => {
-      //   if (testOptionsShowing) {
-      //     hideOptionsPopup();
-      //     removeSelectedElement();
-      //     console.log("scroll event remove");
-      //   }
-      // });
+
       document.addEventListener("mouseup", async (event) => {
         //highlighting text functionality
         //cursor location
