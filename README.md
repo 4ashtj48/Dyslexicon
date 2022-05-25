@@ -26,4 +26,6 @@
 ### firefox & Safari extension in progress
 ### PDF Functionality coming soon
 
+https://chrome.google.com/webstore/detail/dyslexicon/cbppfdnlceepnmjcfomnlomiaddahonn
+
 
