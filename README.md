@@ -2,7 +2,7 @@
 
 
 
-##Now available on chrome
+## Now available on chrome
 
 https://chrome.google.com/webstore/detail/dyslexicon/cbppfdnlceepnmjcfomnlomiaddahonn
 
