@@ -1,15 +1,12 @@
 # Dyslexicon
 
-----
-## 1- download
-## 2- unzip
-## 3- manage extensions on Chrome
-  ### turn on developer mode
-  ### load unpacked
-  ### select extension
 
-## 4- select Options with browser action (Icon)
----
+
+##Now available on chrome
+
+https://chrome.google.com/webstore/detail/dyslexicon/cbppfdnlceepnmjcfomnlomiaddahonn
+
+
 
 ## Functionality
 ### change font
@@ -21,11 +18,10 @@
 
 
 ---
-## Coming Soon
-### will be added to Chrome store in less than 30 days.
+## Planned updates
 ### firefox & Safari extension in progress
-### PDF Functionality coming soon
+### PDF Functionality 
 
-https://chrome.google.com/webstore/detail/dyslexicon/cbppfdnlceepnmjcfomnlomiaddahonn
+
 
 
